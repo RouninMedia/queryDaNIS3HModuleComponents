@@ -12,7 +12,7 @@ ini_set('display_errors', 1);
  //* QUERY ashivaModule COMPONENTS *//
 //*********************************//
 
-function queryAshivaModuleComponents($Module, $Publisher) {
+function queryDaNIS3HModuleComponents($Module, $Publisher) {
 
   // What about... CUSTOM COMPONENTS ?? Probably need to preserve these?
 
@@ -40,10 +40,10 @@ function queryAshivaModuleComponents($Module, $Publisher) {
   $ashivaModuleManifest = trim($ashivaModuleManifest);
 
   // BUILD ASHIVA MODULE COMPONENTS ARRAY  
-  $ashivaModuleComponents = explode(',', $ashivaModuleManifest);
-  array_pop($ashivaModuleComponents);
+  $danis3hModuleComponents = explode(',', $ashivaModuleManifest);
+  array_pop($danis3hModuleComponents);
 
-  return $ashivaModuleComponents;
+  return $danis3hModuleComponents;
 }
 
 ?>
