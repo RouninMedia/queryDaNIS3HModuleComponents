@@ -1,45 +1,45 @@
-# queryAshivaModuleComponents
-`queryAshivaModuleComponents()` is a PHP function which queries an ashivaModule Manifest and returns the Da3SH Component types employed by that ashivaModule.
+# queryDaNIS3HModuleComponents
+`queryDaNIS3HModuleComponents()` is a PHP function which queries an danis3hModule Manifest and returns the DaNIS3H Component types employed by that danis3hModule.
 
 The function requires **two parameters**:
 
  - `$Module`
  - `$Publisher`
 
-## queryAshivaModuleComponents Function:
+## queryDaNIS3HModuleComponents Function:
 
 ```
-function queryAshivaModuleComponents($Module, $Publisher) {
+function queryDaNIS3HModuleComponents($Module, $Publisher) {
 
   // What about... CUSTOM COMPONENTS ?? Probably need to preserve these?
 
-  $ashivaModuleManifest = getAshivaModuleManifest($Module, $Publisher);
+  $danis3hModuleManifest = getDaNIS3HModuleManifest($Module, $Publisher);
   
   // DELETE COMMENTS
-  $ashivaModuleManifest = preg_replace('/\/\/(?!\s{1}[A-Z]).*/', '', $ashivaModuleManifest);
-  $ashivaModuleManifest = preg_replace('/\/\*.*?\*\//s', '', $ashivaModuleManifest);
+  $danis3hModuleManifest = preg_replace('/\/\/(?!\s{1}[A-Z]).*/', '', $danis3hModuleManifest);
+  $danis3hModuleManifest = preg_replace('/\/\*.*?\*\//s', '', $danis3hModuleManifest);
   
   // EXTRACT BUILD COMPONENTS
-  $ashivaModuleManifest = preg_replace('/.*(\/\/\s{1}BUILD\s{1}COMPONENTS)/s', '  // BUILD COMPONENTS', $ashivaModuleManifest);
-  $ashivaModuleManifest = preg_replace('/.*(\/\/\s{1}BUILD\s{1}COMPONENTS[^\/]*).*/s', '$1', $ashivaModuleManifest);
+  $danis3hModuleManifest = preg_replace('/.*(\/\/\s{1}BUILD\s{1}COMPONENTS)/s', '  // BUILD COMPONENTS', $danis3hModuleManifest);
+  $danis3hModuleManifest = preg_replace('/.*(\/\/\s{1}BUILD\s{1}COMPONENTS[^\/]*).*/s', '$1', $danis3hModuleManifest);
 
   // REMOVE SPECIAL COMPONENTS
-  $ashivaModuleManifest = preg_replace('/\$Module\[\'(?:Register|Requires).*/', '', $ashivaModuleManifest);
+  $danis3hModuleManifest = preg_replace('/\$Module\[\'(?:Register|Requires).*/', '', $danis3hModuleManifest);
 
   // DELETE LINE INDENTS
-  $ashivaModuleManifest = str_replace('  ', '', $ashivaModuleManifest);
-  $ashivaModuleManifest = str_replace('// BUILD COMPONENTS', '', $ashivaModuleManifest);
+  $danis3hModuleManifest = str_replace('  ', '', $danis3hModuleManifest);
+  $danis3hModuleManifest = str_replace('// BUILD COMPONENTS', '', $danis3hModuleManifest);
 
   // PREPARE ASHIVA MODULE COMPONENTS ARRAY
-  $ashivaModuleManifest = str_replace('$Module[\'', '', $ashivaModuleManifest);
-  $ashivaModuleManifest = preg_replace('/\'\].*/', '', $ashivaModuleManifest);
-  $ashivaModuleManifest = preg_replace('/([A-Za-z0-9])\n/', '$1,', $ashivaModuleManifest);
-  $ashivaModuleManifest = trim($ashivaModuleManifest);
+  $danis3hModuleManifest = str_replace('$Module[\'', '', $danis3hModuleManifest);
+  $danis3hModuleManifest = preg_replace('/\'\].*/', '', $danis3hModuleManifest);
+  $danis3hModuleManifest = preg_replace('/([A-Za-z0-9])\n/', '$1,', $danis3hModuleManifest);
+  $danis3hModuleManifest = trim($danis3hModuleManifest);
 
   // BUILD ASHIVA MODULE COMPONENTS ARRAY  
-  $ashivaModuleComponents = explode(',', $ashivaModuleManifest);
-  array_pop($ashivaModuleComponents);
+  $danis3hModuleComponents = explode(',', $danis3hModuleManifest);
+  array_pop($danis3hModuleComponents);
 
-  return $ashivaModuleComponents;
+  return $danis3hModuleComponents;
 }
 ```
